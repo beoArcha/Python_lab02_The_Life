@@ -1,2 +1,2 @@
-# Python_lab02_The_Life
+# Python lab02 The Life
  The Life Game MVC 
