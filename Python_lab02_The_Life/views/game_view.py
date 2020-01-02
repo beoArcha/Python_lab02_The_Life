@@ -7,7 +7,13 @@ class GameView:
         """C'stor"""
         self.__size = size
         self.__grid = GridView(size)
+        self.__plot_entry()
 
-    def plot_next_grid(self, model: GridModel, turn: int):
-        print("\n{1}{0}{1}\n".format(turn, "++++"))
+    def __plot_entry(self) -> None:
+        print(
+            "Size of grid is {}.\nA - means alive.\nD - means dead.".format(self.__size)
+        )
+
+    def plot_next_grid(self, model: GridModel, turn: int) -> None:
+        print("\n{1}{0:02}{1}\n".format(turn, "+" * self.__size))
         self.__grid.next(model)
