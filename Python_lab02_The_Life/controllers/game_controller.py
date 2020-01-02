@@ -28,7 +28,7 @@ class GameController:
             self.__changes_inc(PositionModel(x, y))
             while self.__number_of_changes < 3:
                 new_start_point = PositionModel(randrange(x - 1, x + 1),
-                                   randrange(y - 1, y + 1))
+                                                randrange(y - 1, y + 1))
                 if new_start_point not in self.__current_changes:
                     self.__changes_inc(new_start_point)
                     self.__game_model.staring_position = new_start_point

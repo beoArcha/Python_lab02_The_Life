@@ -10,4 +10,4 @@ class GameView:
 
     def plot_next_grid(self, model: GridModel, turn: int):
         print("\n{1}{0}{1}\n".format(turn, "++++"))
-        self.__grid.next(GridModel)
+        self.__grid.next(model)
