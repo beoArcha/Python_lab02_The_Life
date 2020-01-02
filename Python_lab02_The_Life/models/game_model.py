@@ -1,4 +1,5 @@
 from .grid_model import GridModel
+from .position_model import PositionModel
 
 
 class GameModel:
@@ -29,3 +30,10 @@ class GameModel:
     def staring_position(self) -> list:
         """"Return starting positions"""
         return self.__staring_position
+
+    @staring_position.setter
+    def staring_position(self, val: PositionModel) -> None:
+        if not self.__grid.get_cell_PM(val).alive:
+            self.staring_position.append(val)
+        else:
+            raise Exception("The sam starting position already added")

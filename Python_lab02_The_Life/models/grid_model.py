@@ -1,4 +1,5 @@
 from .cell_model import CellModel
+from .position_model import PositionModel
 
 
 class GridModel:
@@ -18,4 +19,10 @@ class GridModel:
             return self.__grid()[x][y]
         else:
             raise Exception('X and Y should be between 0 and {}'.format(self.__size))
+
+    def get_cell_PM(self, position: PositionModel) -> CellModel:
+        return self.get_cell(position.position[0], position.position[1])
+
+    def get_cell_neighbours(self) -> tuple:
+        pass
 
