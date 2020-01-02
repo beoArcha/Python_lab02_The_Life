@@ -9,3 +9,12 @@ class PositionModel:
     def position(self) -> tuple:
         """Return (x,y) position"""
         return self.__x, self.__y
+
+    def __hash__(self):
+        return hash((self.__x, self.__y))
+
+    def __eq__(self, other):
+        try:
+            return self.position == other.position
+        except AttributeError:
+            return NotImplemented

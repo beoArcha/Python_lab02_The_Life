@@ -1,22 +1,79 @@
+from random import randrange
 from Python_lab02_The_Life.models.game_model import GameModel
 from Python_lab02_The_Life.views.game_view import GameView
+from Python_lab02_The_Life.models.position_model import PositionModel
+from .grid_controller import GridController
 
 
 class GameController:
     """Main controller for the game"""
-    def __init__(self, game: GameModel, living_cell: int):
+
+    def __init__(self, game_model: GameModel, living_cell: int):
         """C'stor"""
-        self.__game = game
+        self.__game_model = game_model
         self.__number_of_starting_position = living_cell
+        self.__view = GameView(self.__game_model.size)
+        self.__number_of_changes = 0
+        self.__current_changes = set()
         self.__set_starting_position()
-        self.__view = GameView(self.__game.size)
 
     def __set_starting_position(self):
         """Setting randomized starting position,
         where at least three are close"""
-        pass
+        if 3 <= self.__number_of_starting_position <= 10:
+            x = randrange(1, self.__game_model.size - 1)
+            y = randrange(1, self.__game_model.size - 1)
+            self.__game_model.staring_position = PositionModel(x, y)
+            self.__changes_inc(PositionModel(x, y))
+            while self.__number_of_changes < 3:
+                x_around = randrange(x - 1, x + 1)
+                y_around = randrange(y - 1, y + 1)
+                if x_around != x or y_around != y:
+                    self.__changes_inc(PositionModel(x_around, y_around))
+                    self.__game_model.staring_position = PositionModel(x_around, y_around)
+            while self.__number_of_changes < self.__number_of_starting_position:
+                new_start_point = PositionModel(randrange(0, self.__game_model.size),
+                                                randrange(0, self.__game_model.size))
+                if new_start_point not in self.__current_changes:
+                    self.__changes_inc(new_start_point)
+                    self.__game_model.staring_position = new_start_point
+        else:
+            raise Exception("Number of living cell must be between 3 and 10")
 
     def play(self) -> None:
         """Execute game"""
-        for i in range(0, self.__game.number_of_turns):
-            self.__game.turn_inc()
+        self.__first_turn()
+        self.__game_model.turn_inc()
+        self.__view.plot_next_grid(self.__current_changes, self.__game_model.current_turn)
+        self.__changes_zero()
+        for i in range(1, self.__game_model.number_of_turns):
+            self.__game_model.turn_inc()
+            self.__next_turn()
+            if self.__number_of_changes == 0:
+                break
+            self.__view.plot_next_grid(self.__current_changes, self.__game_model.current_turn)
+            self.__changes_zero()
+        if self.__game_model.save:
+            self.__save()
+
+    def __next_turn(self) -> None:
+        for p in self.__current_changes:
+            pass
+
+    def __save(self) -> None:
+        pass
+
+    def __changes_inc(self, position: PositionModel) -> None:
+        """Increment changes by 1"""
+        self.__number_of_changes = self.__number_of_changes + 1
+        self.__current_changes.add(position)
+
+    def __changes_zero(self) -> None:
+        """Zeroing number of changes"""
+        self.__number_of_changes = 0
+        self.__current_changes = set()
+
+    def __first_turn(self) -> None:
+        """First turn of game"""
+        grid_controller = GridController(self.__game_model.grid)
+        grid_controller.initialize(self.__current_changes)

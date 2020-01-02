@@ -11,8 +11,13 @@ class GameModel:
         self.__number_of_turns = turn
         self.__interval_time = interval
         self.__name = name
-        self.__save = bool
+        self.__save = save
         self.__staring_position = []
+
+    @property
+    def grid(self) -> GridModel:
+        """"Return grid"""
+        return self.__grid
 
     @property
     def size(self) -> int:
@@ -35,6 +40,11 @@ class GameModel:
         return self.__interval_time
 
     @property
+    def save(self) -> bool:
+        """"Return is should saved"""
+        return self.__save
+
+    @property
     def name(self) -> str:
         """"Return game name"""
         return self.__name
@@ -47,7 +57,7 @@ class GameModel:
     @staring_position.setter
     def staring_position(self, val: PositionModel) -> None:
         """Setting new starting position"""
-        if not self.__grid.get_cell_PM(val).alive:
+        if val not in self.staring_position:
             self.staring_position.append(val)
         else:
             raise Exception("The same starting position already added")
