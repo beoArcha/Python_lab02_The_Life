@@ -15,3 +15,17 @@ class GameModel:
     def current_turn(self) -> int:
         """"Return current turn number"""
         return self.__current_turn
+
+    @property
+    def number_of_turns(self) -> int:
+        """"Return number of turns"""
+        return self.__number_of_turns
+
+    def interval_time(self) -> int:
+        """"Return interval time"""
+        return self.__interval_time
+
+    @property
+    def staring_position(self) -> list:
+        """"Return starting positions"""
+        return self.__staring_position
