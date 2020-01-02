@@ -1,4 +1,3 @@
-from copy import deepcopy
 from .cell_model import CellModel
 from .position_model import PositionModel
 
@@ -52,6 +51,7 @@ class GridModel:
         return neighbours
 
     def get_cell_neighbours_PM(self, position: PositionModel) -> set:
+        """Return neighbours of cell"""
         t = position.position
         return self.get_cell_neighbours(t[0], t[1])
 

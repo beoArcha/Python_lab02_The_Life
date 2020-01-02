@@ -1,8 +1,8 @@
 from Python_lab02_The_Life.models.grid_model import GridModel
-from Python_lab02_The_Life.models.position_model import PositionModel
 
 
 class GridController:
+    """"Controller for gird"""
     def __init__(self, grid: GridModel):
         """C'stor"""
         self.__grid = grid

@@ -4,12 +4,11 @@ from .position_model import PositionModel
 
 class GameModel:
     """Game models"""
-    def __init__(self, size: int, turn: int, interval: int, name: str, save: bool):
+    def __init__(self, size: int, turn: int, name: str, save: bool):
         """C'stor"""
         self.__grid = GridModel(size)
         self.__current_turn = 0
         self.__number_of_turns = turn
-        self.__interval_time = interval
         self.__name = name
         self.__save = save
         self.__staring_position = []

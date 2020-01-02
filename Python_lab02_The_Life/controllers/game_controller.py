@@ -8,7 +8,6 @@ from ..models.cell_model import CellModel
 
 class GameController:
     """Main controller for the game"""
-
     def __init__(self, game_model: GameModel, living_cell: int):
         """C'stor"""
         self.__game_model = game_model
@@ -22,7 +21,7 @@ class GameController:
     def __set_starting_position(self):
         """Setting randomized starting position,
         where at least three are close"""
-        if 3 <= self.__number_of_starting_position <= 10:
+        if 3 <= self.__number_of_starting_position <= 24:
             x = randrange(1, self.__game_model.size - 1)
             y = randrange(1, self.__game_model.size - 1)
             self.__game_model.staring_position = PositionModel(x, y)
