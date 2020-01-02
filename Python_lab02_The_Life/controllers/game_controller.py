@@ -42,7 +42,7 @@ class GameController:
             raise Exception("Number of living cell must be between 3 and 10")
 
     def play(self) -> None:
-        """Execute game"""
+        """Execute a game"""
         self.__first_turn()
         self.__game_model.turn_inc()
         self.__view.plot_next_grid(self.__game_model.grid, self.__game_model.current_turn)
@@ -58,8 +58,11 @@ class GameController:
             self.__save()
 
     def __next_turn(self) -> None:
-        for p in self.__current_changes:
+        """Next turn of a game"""
+        affected = self.__grid_controller.affection()
+        for a in affected:
             pass
+        self.__grid_controller.change(self.__current_changes)
 
     def __save(self) -> None:
         pass
@@ -75,5 +78,5 @@ class GameController:
         self.__current_changes = set()
 
     def __first_turn(self) -> None:
-        """First turn of game"""
-        self.__grid_controller.initialize(self.__current_changes)
+        """First turn of a game"""
+        self.__grid_controller.change(self.__current_changes)
