@@ -1,2 +1,3 @@
-__all__ = ["cell",
-           "grid"]
+__all__ = ["cell_model",
+           "game_model",
+           "grid_model"]

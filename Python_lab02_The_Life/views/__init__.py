@@ -1,1 +1,1 @@
-__all__ = []
+__all__ = ["game_view"]
