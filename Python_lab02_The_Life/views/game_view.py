@@ -1,3 +1,4 @@
+from Python_lab02_The_Life.models.grid_model import GridModel
 from Python_lab02_The_Life.views.grid_view import GridView
 
 
@@ -7,6 +8,6 @@ class GameView:
         self.__size = size
         self.__grid = GridView(size)
 
-    def plot_next_grid(self, current: set, turn: int):
+    def plot_next_grid(self, model: GridModel, turn: int):
         print("\n{1}{0}{1}\n".format(turn, "++++"))
-        self.__grid.next(current)
+        self.__grid.next(GridModel)

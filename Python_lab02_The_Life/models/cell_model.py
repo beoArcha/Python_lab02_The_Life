@@ -12,3 +12,7 @@ class CellModel:
     def alive(self) -> bool:
         """Check, is cell is alive"""
         return self.__alive
+
+    @alive.setter
+    def alive(self, value):
+        self.__alive = value

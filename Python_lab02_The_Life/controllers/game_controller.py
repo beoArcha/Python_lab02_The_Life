@@ -16,6 +16,7 @@ class GameController:
         self.__number_of_changes = 0
         self.__current_changes = set()
         self.__set_starting_position()
+        self.__grid_controller = GridController(self.__game_model.grid)
 
     def __set_starting_position(self):
         """Setting randomized starting position,
@@ -26,11 +27,11 @@ class GameController:
             self.__game_model.staring_position = PositionModel(x, y)
             self.__changes_inc(PositionModel(x, y))
             while self.__number_of_changes < 3:
-                x_around = randrange(x - 1, x + 1)
-                y_around = randrange(y - 1, y + 1)
-                if x_around != x or y_around != y:
-                    self.__changes_inc(PositionModel(x_around, y_around))
-                    self.__game_model.staring_position = PositionModel(x_around, y_around)
+                new_start_point = PositionModel(randrange(x - 1, x + 1),
+                                   randrange(y - 1, y + 1))
+                if new_start_point not in self.__current_changes:
+                    self.__changes_inc(new_start_point)
+                    self.__game_model.staring_position = new_start_point
             while self.__number_of_changes < self.__number_of_starting_position:
                 new_start_point = PositionModel(randrange(0, self.__game_model.size),
                                                 randrange(0, self.__game_model.size))
@@ -44,14 +45,14 @@ class GameController:
         """Execute game"""
         self.__first_turn()
         self.__game_model.turn_inc()
-        self.__view.plot_next_grid(self.__current_changes, self.__game_model.current_turn)
+        self.__view.plot_next_grid(self.__game_model.grid, self.__game_model.current_turn)
         self.__changes_zero()
         for i in range(1, self.__game_model.number_of_turns):
             self.__game_model.turn_inc()
             self.__next_turn()
             if self.__number_of_changes == 0:
                 break
-            self.__view.plot_next_grid(self.__current_changes, self.__game_model.current_turn)
+            self.__view.plot_next_grid(self.__game_model.grid, self.__game_model.current_turn)
             self.__changes_zero()
         if self.__game_model.save:
             self.__save()
@@ -75,5 +76,4 @@ class GameController:
 
     def __first_turn(self) -> None:
         """First turn of game"""
-        grid_controller = GridController(self.__game_model.grid)
-        grid_controller.initialize(self.__current_changes)
+        self.__grid_controller.initialize(self.__current_changes)

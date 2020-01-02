@@ -7,4 +7,5 @@ class GridController:
 
     def initialize(self, changes: set) -> None:
         for c in changes:
-            x, y = c.position
+            cell = self.__grid.get_cell_PM(c)
+            cell.change()
