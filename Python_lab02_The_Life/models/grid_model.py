@@ -17,8 +17,13 @@ class GridModel:
 
     def __make_grid(self) -> tuple:
         """Make grid of tuple of tuple of Cell object"""
-        row = tuple(CellModel() for x in range(0, self.__size))
-        return tuple(deepcopy(row) for x in range(0, self.__size))
+        grid = list()
+        for i in range(0, self.__size):
+            row = list()
+            for j in range(0, self.__size):
+                row.append(CellModel(PositionModel(i, j)))
+            grid.append(tuple(row))
+        return tuple(grid)
 
     def get_cell(self, x: int, y: int) -> CellModel:
         """Return cell from grid"""
@@ -45,6 +50,10 @@ class GridModel:
             for i in range(x, x + 1):
                 neighbours.update(self.__get_cell_neighbours_y(i, y))
         return neighbours
+
+    def get_cell_neighbours_PM(self, position: PositionModel) -> set:
+        t = position.position
+        return self.get_cell_neighbours(t[0], t[1])
 
     def __get_cell_neighbours_y(self, x: int, y: int) -> set:
         """Return neighbours of cell, y part"""

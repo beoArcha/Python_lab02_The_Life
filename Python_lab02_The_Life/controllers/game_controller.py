@@ -3,6 +3,7 @@ from Python_lab02_The_Life.models.game_model import GameModel
 from Python_lab02_The_Life.views.game_view import GameView
 from Python_lab02_The_Life.models.position_model import PositionModel
 from .grid_controller import GridController
+from ..models.cell_model import CellModel
 
 
 class GameController:
@@ -43,7 +44,7 @@ class GameController:
 
     def play(self) -> None:
         """Execute a game"""
-        self.__first_turn()
+        self.__grid_controller.change(self.__current_changes)
         self.__game_model.turn_inc()
         self.__view.plot_next_grid(self.__game_model.grid, self.__game_model.current_turn)
         self.__changes_zero()
@@ -52,6 +53,7 @@ class GameController:
             self.__next_turn()
             if self.__number_of_changes == 0:
                 break
+            self.__grid_controller.change(self.__current_changes)
             self.__view.plot_next_grid(self.__game_model.grid, self.__game_model.current_turn)
             self.__changes_zero()
         if self.__game_model.save:
@@ -60,9 +62,32 @@ class GameController:
     def __next_turn(self) -> None:
         """Next turn of a game"""
         affected = self.__grid_controller.affection()
+        neighbours = set()
         for a in affected:
-            pass
-        self.__grid_controller.change(self.__current_changes)
+            neighbours.update(self.__game_model.grid.get_cell_neighbours_PM(a.position))
+        for neigh in neighbours:
+            alive_count = 0
+            for n in neighbours:
+                if n.alive and self.__is_neighbour(neigh, n):
+                    alive_count += 1
+            if neigh.alive:
+                if alive_count != 3:
+                    self.__changes_inc(neigh.position)
+            else:
+                if alive_count == 3:
+                    self.__changes_inc(neigh.position)
+
+    @staticmethod
+    def __is_neighbour(cell: CellModel, neighbour: CellModel) -> bool:
+        """Check is neighbour, without itself"""
+        x_c, y_c = cell.position.position
+        x_n, y_n = neighbour.position.position
+        if x_c == x_n and y_c == y_n:
+            return False
+        elif x_c - 1 <= x_n <= x_c +1 and y_c - 1 <= y_n <= y_c +1:
+            return True
+        else:
+            return False
 
     def __save(self) -> None:
         pass
@@ -76,7 +101,3 @@ class GameController:
         """Zeroing number of changes"""
         self.__number_of_changes = 0
         self.__current_changes = set()
-
-    def __first_turn(self) -> None:
-        """First turn of a game"""
-        self.__grid_controller.change(self.__current_changes)

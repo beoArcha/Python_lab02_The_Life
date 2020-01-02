@@ -6,7 +6,6 @@ class GameView:
     def __init__(self, size: int):
         """C'stor"""
         self.__size = size
-        self.__grid = GridView(size)
         self.__plot_entry()
 
     def __plot_entry(self) -> None:
@@ -16,4 +15,5 @@ class GameView:
 
     def plot_next_grid(self, model: GridModel, turn: int) -> None:
         print("\n{1}{0:02}{1}\n".format(turn, "+" * self.__size))
-        self.__grid.next(model)
+        view = GridView(self.__size)
+        view.next(model)
