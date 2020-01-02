@@ -1,1 +1,2 @@
-__all__ = ["game_view"]
+__all__ = ["game_view",
+           "grid_view"]

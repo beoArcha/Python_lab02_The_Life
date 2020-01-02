@@ -10,5 +10,5 @@ class CellModel:
 
     @property
     def alive(self) -> bool:
-        """Check if cell is alive"""
+        """Check, is cell is alive"""
         return self.__alive
