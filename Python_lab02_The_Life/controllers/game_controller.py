@@ -70,7 +70,7 @@ class GameController:
                 if n.alive and self.__is_neighbour(neigh, n):
                     alive_count += 1
             if neigh.alive:
-                if 2 > alive_count > 4:
+                if 2 > alive_count >= 4:
                     self.__changes_inc(neigh.position)
             else:
                 if alive_count == 3:
