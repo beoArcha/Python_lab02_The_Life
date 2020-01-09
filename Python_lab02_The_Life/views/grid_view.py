@@ -1,4 +1,5 @@
 from prettytable import PrettyTable
+from Python_lab02_The_Life.enums import CellRepresentation
 from Python_lab02_The_Life.models.grid_model import GridModel
 
 
@@ -16,9 +17,9 @@ class GridView:
             new_row.append(x)
             for y in range(0, self.__size):
                 if current.get_cell(x, y).alive:
-                    new_row.append("O")
+                    new_row.append(CellRepresentation.Alive)
                 else:
-                    new_row.append("X")
+                    new_row.append(CellRepresentation.Dead)
             self.__table.add_row(new_row)
         print(self.__table)
 

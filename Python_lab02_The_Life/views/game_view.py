@@ -1,9 +1,11 @@
+from Python_lab02_The_Life.enums import CellRepresentation
 from Python_lab02_The_Life.models.grid_model import GridModel
 from Python_lab02_The_Life.views.grid_view import GridView
 
 
 class GameView:
     """Main vie of game"""
+
     def __init__(self, size: int):
         """C'stor"""
         self.__size = size
@@ -12,7 +14,9 @@ class GameView:
     def __plot_entry(self) -> None:
         """Plot first lines of game"""
         print(
-            "Size of grid is {}.\nO - means alive.\nX - means dead.".format(self.__size)
+            "Size of grid is {}.\n{} - means alive.\n{} - means dead.".format(self.__size,
+                                                                              CellRepresentation.Alive,
+                                                                              CellRepresentation.Dead)
         )
 
     def plot_next_grid(self, model: GridModel, turn: int) -> None:
