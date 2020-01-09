@@ -18,7 +18,8 @@ class CellModel:
         return self.__alive
 
     @alive.setter
-    def alive(self, value):
+    def alive(self, value: bool) -> None:
+        """Setting alive"""
         self.__alive = value
 
     @property

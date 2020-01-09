@@ -12,7 +12,7 @@ class GameView:
     def __plot_entry(self) -> None:
         """Plot first lines of game"""
         print(
-            "Size of grid is {}.\nA - means alive.\nD - means dead.".format(self.__size)
+            "Size of grid is {}.\nO - means alive.\nX - means dead.".format(self.__size)
         )
 
     def plot_next_grid(self, model: GridModel, turn: int) -> None:

@@ -16,9 +16,9 @@ class GridView:
             new_row.append(x)
             for y in range(0, self.__size):
                 if current.get_cell(x, y).alive:
-                    new_row.append("A")
+                    new_row.append("O")
                 else:
-                    new_row.append("D")
+                    new_row.append("X")
             self.__table.add_row(new_row)
         print(self.__table)
 
