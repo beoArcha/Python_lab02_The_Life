@@ -34,11 +34,6 @@ class GameModel:
         return self.__number_of_turns
 
     @property
-    def interval_time(self) -> int:
-        """"Return interval time"""
-        return self.__interval_time
-
-    @property
     def save(self) -> bool:
         """"Return is should saved"""
         return self.__save
