@@ -1,2 +1,5 @@
-__all__ = ["game_view",
-           "grid_view"]
+from .grid_view import GridView
+from .game_view import GameView
+
+__all__ = ["GridView",
+           "GameView"]

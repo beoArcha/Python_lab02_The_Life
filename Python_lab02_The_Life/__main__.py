@@ -1,5 +1,8 @@
 import argparse
+import os
+import sys
 from datetime import datetime
+sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 from Python_lab02_The_Life.models.game_model import GameModel
 from Python_lab02_The_Life.controllers.game_controller import GameController
 
@@ -18,8 +21,8 @@ def parsing_args() -> argparse:
     parser = argparse.ArgumentParser(description="Play the life game.")
     parser.add_argument("--grid", "-g", help="Size of square grid between 5 and 24", type=int, default=10,
                         choices=range(5, 26))
-    parser.add_argument("--living_cell", "-lc", help="Number of live cell between 2 and 24", type=int, default=12,
-                        choices=range(3, 25))
+    parser.add_argument("--living_cell", "-lc", help="Number of live cell between 2 and 24", type=int, default=10,
+                        choices=range(3, 10))
     parser.add_argument("--turn", "-t", help="Number of turns between 5 and 25", type=int, default=10,
                         choices=range(5, 26))
     parser.add_argument("--name", "-n", help="Game's name", type=str,
