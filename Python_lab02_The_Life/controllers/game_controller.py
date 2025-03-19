@@ -63,7 +63,7 @@ class GameController:
         affected = self.__grid_controller.affection()
         neighbours = set()
         for a in affected:
-            neighbours.update(self.__game_model.grid.get_cell_neighbours_PM(a.position))
+            neighbours.update(self.__game_model.grid.get_cell_neighbours_pm(a.position))
         for neigh in neighbours:
             alive_count = 0
             for n in neighbours:

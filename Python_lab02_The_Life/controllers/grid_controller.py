@@ -10,7 +10,7 @@ class GridController:
     def change(self, changes: set) -> None:
         """Change cell life status"""
         for c in changes:
-            cell = self.__grid.get_cell_PM(c)
+            cell = self.__grid.get_cell_pm(c)
             cell.change()
 
     def affection(self) -> set:

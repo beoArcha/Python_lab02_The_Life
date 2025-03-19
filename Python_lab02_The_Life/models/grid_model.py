@@ -11,11 +11,11 @@ class GridModel:
 
     @property
     def size(self) -> int:
-        """"Return grid size"""
+        """Return grid size"""
         return self.__size
 
     def __make_grid(self) -> tuple:
-        """Make grid of tuple of tuple of Cell object"""
+        """Make grid nested tuple of Cell object"""
         grid = list()
         for i in range(0, self.__size):
             row = list()
@@ -31,7 +31,7 @@ class GridModel:
         else:
             raise Exception('X and Y should be between 0 and {}'.format(self.__size))
 
-    def get_cell_PM(self, position: PositionModel) -> CellModel:
+    def get_cell_pm(self, position: PositionModel) -> CellModel:
         """Return cell from grid"""
         t = position.position
         return self.get_cell(t[0], t[1])
@@ -50,7 +50,7 @@ class GridModel:
                 neighbours.update(self.__get_cell_neighbours_y(i, y))
         return neighbours
 
-    def get_cell_neighbours_PM(self, position: PositionModel) -> set:
+    def get_cell_neighbours_pm(self, position: PositionModel) -> set:
         """Return neighbours of cell"""
         t = position.position
         return self.get_cell_neighbours(t[0], t[1])

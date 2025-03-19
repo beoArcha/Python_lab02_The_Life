@@ -20,32 +20,32 @@ class GameModel:
 
     @property
     def size(self) -> int:
-        """"Return grid size"""
+        """Return grid size"""
         return self.__grid.size
 
     @property
     def current_turn(self) -> int:
-        """"Return current turn number"""
+        """Return current turn number"""
         return self.__current_turn
 
     @property
     def number_of_turns(self) -> int:
-        """"Return number of turns"""
+        """Return number of turns"""
         return self.__number_of_turns
 
     @property
     def save(self) -> bool:
-        """"Return is should saved"""
+        """Return saved"""
         return self.__save
 
     @property
     def name(self) -> str:
-        """"Return game name"""
+        """Return game name"""
         return self.__name
 
     @property
     def staring_position(self) -> list:
-        """"Return starting positions"""
+        """Return starting positions"""
         return self.__staring_position
 
     @staring_position.setter
